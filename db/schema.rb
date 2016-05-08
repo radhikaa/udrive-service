@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160422124747) do
+ActiveRecord::Schema.define(version: 20160427103818) do
+
+  create_table "cars", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.string   "number",     limit: 255
+    t.string   "make",       limit: 255
+    t.string   "device_id",  limit: 255
+    t.decimal  "latitude",               precision: 10, scale: 7
+    t.decimal  "longitude",              precision: 10, scale: 7
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+  end
 
   create_table "licenses", force: :cascade do |t|
     t.string   "filename",      limit: 255
