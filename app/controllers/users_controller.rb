@@ -11,7 +11,6 @@ class UsersController < ApplicationController
   end
 
   def index
-    users = User.all.collect {|user| {email: user.email, password: user.password}}
-    render json: {users: users}
+    render json: User.all
   end
 end

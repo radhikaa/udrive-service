@@ -1,14 +1,18 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+# Cars sample data set
+Car.create(
+      name: 'i10',
+      number: 'TN50 7222',
+      make: 'Hyundai',
+      device_id: '7451eeb8c8367124',
+      latitude: '12.9969',
+      longitude: '80.2563'
+)
 
 Car.create(
-    name: 'i10',
-    number: 'TN50 7222',
-    make: 'Hyundai',
-    device_id: '7451eeb8c8367124'
+    name: 'Fiesta',
+    number: 'TN01 7221',
+    make: 'Ford',
+    device_id: '7451eeb8c8367125',
+    latitude: '13.0002',
+    longitude: '80.2668'
 )

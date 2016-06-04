@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160427103818) do
+ActiveRecord::Schema.define(version: 20160604092351) do
+
+  create_table "car_bookings", force: :cascade do |t|
+    t.integer  "car_id",     limit: 4
+    t.integer  "user_id",    limit: 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "car_bookings", ["car_id"], name: "index_car_bookings_on_car_id", using: :btree
+  add_index "car_bookings", ["user_id"], name: "index_car_bookings_on_user_id", using: :btree
 
   create_table "cars", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -47,4 +57,6 @@ ActiveRecord::Schema.define(version: 20160427103818) do
     t.datetime "updated_at"
   end
 
+  add_foreign_key "car_bookings", "cars", on_delete: :cascade
+  add_foreign_key "car_bookings", "users", on_delete: :cascade
 end
