@@ -55,6 +55,16 @@ class CarsController < ApplicationController
     render json: {latitude: @car.latitude, longitude: @car.longitude}
   end
 
+  def book
+    user = User.where(email: params[:email]).first
+    car = Car.find_by(id: params[:id])
+    car_booking = CarBooking.new(car: car, user: user)
+    if car_booking.save
+      car.update(available: false)
+    end
+    render json: car
+  end
+
   private
     def set_car
       @car = Car.find(params[:id])

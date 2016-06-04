@@ -8,7 +8,14 @@ Rails.application.routes.draw do
 
   resources :users
 
-  post 'cars/update_location', to: 'cars#update_location'
+  resources :cars do
+    member do
+      put :book
+    end
+    collection do
+      post '/:device_id/update_location', to: 'cars#update_location'
+    end
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
