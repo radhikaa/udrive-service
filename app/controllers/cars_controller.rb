@@ -51,12 +51,14 @@ class CarsController < ApplicationController
 
   def update_location
     car = Car.find_by_device_id(params[:device_id])
-    current_booking = CarBooking.find_by_car_id_and_status(car.id, CarBooking::Status::SCHEDULED)
     new_latitude = params[:latitude]
     new_longitude = params[:longitude]
-    updated_distance = current_booking.distance + car.distance_to([new_latitude, new_longitude])
     car.update_attributes(:latitude => new_latitude, :longitude => new_longitude)
-    current_booking.update_attributes(:distance => updated_distance)
+    current_booking = CarBooking.find_by_car_id_and_status(car.id, CarBooking::Status::SCHEDULED)
+    if current_booking
+      updated_distance = current_booking.distance + car.distance_to([new_latitude, new_longitude])
+      current_booking.update_attributes(:distance => updated_distance)
+    end
     render json: {latitude: car.latitude, longitude: car.longitude}
   end
 

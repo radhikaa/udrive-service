@@ -17,6 +17,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :car_bookings do
+    collection do
+      post '/:device_id/close_trip', to: 'car_bookings#close_trip'
+    end
+  end
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
