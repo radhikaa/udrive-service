@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 
   resources :car_bookings do
     collection do
+      put '/:device_id/start_trip', to: 'car_bookings#start_trip'
       post '/:device_id/close_trip', to: 'car_bookings#close_trip'
     end
   end
