@@ -7,8 +7,9 @@ class CarBookingsController < ApplicationController
   end
 
   def close_trip
-    @current_booking.update_attributes(:end_time => Time.now, :end_latitude => @car.latitude,
-                                      :end_longitude => @car.longitude, :status => CarBooking::Status::CLOSED)
+    amount = @current_booking.compute_amount
+    @current_booking.update_attributes(:end_time => Time.now, :end_latitude => @car.latitude, :end_longitude => @car.longitude,
+                                       :status => CarBooking::Status::CLOSED, :amount => amount)
     @car.update_attributes(:available => true)
     render json: @current_booking
   end

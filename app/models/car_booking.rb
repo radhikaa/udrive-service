@@ -6,4 +6,8 @@ class CarBooking < ActiveRecord::Base
   end
   belongs_to :car
   belongs_to :user
+
+  def compute_amount
+    distance * 12;
+  end
 end

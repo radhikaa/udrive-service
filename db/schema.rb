@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160605065204) do
+ActiveRecord::Schema.define(version: 20160605101323) do
 
   create_table "car_bookings", force: :cascade do |t|
     t.integer  "car_id",          limit: 4
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20160605065204) do
     t.decimal  "end_latitude",                precision: 10, scale: 7
     t.decimal  "end_longitude",               precision: 10, scale: 7
     t.decimal  "distance",                    precision: 10, scale: 7, default: 0.0
+    t.decimal  "amount",                      precision: 10, scale: 2
   end
 
   add_index "car_bookings", ["car_id"], name: "index_car_bookings_on_car_id", using: :btree
