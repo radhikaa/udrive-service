@@ -51,7 +51,7 @@ class CarsController < ApplicationController
 
   def update_location
     car = Car.find_by_device_id(params[:device_id])
-    current_booking = CarBooking.find_by_car_id_and_status(@car.id, CarBooking::Status::SCHEDULED)
+    current_booking = CarBooking.find_by_car_id_and_status(car.id, CarBooking::Status::SCHEDULED)
     new_latitude = params[:latitude]
     new_longitude = params[:longitude]
     updated_distance = current_booking.distance + car.distance_to([new_latitude, new_longitude])
