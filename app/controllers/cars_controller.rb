@@ -1,19 +1,4 @@
 class CarsController < ApplicationController
-  before_action :set_car, only: [:show, :edit, :update, :destroy]
-
-  def index
-    render json: Car.all
-  end
-
-  def show
-  end
-
-  def new
-    @car = Car.new
-  end
-
-  def edit
-  end
 
   def create
     @car = Car.new(car_params)
@@ -26,26 +11,6 @@ class CarsController < ApplicationController
         format.html { render :new }
         format.json { render json: @car.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  def update
-    respond_to do |format|
-      if @car.update(car_params)
-        format.html { redirect_to @car, notice: 'Car was successfully updated.' }
-        format.json { render :show, status: :ok, location: @car }
-      else
-        format.html { render :edit }
-        format.json { render json: @car.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  def destroy
-    @car.destroy
-    respond_to do |format|
-      format.html { redirect_to cars_url, notice: 'Car was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 
@@ -70,12 +35,13 @@ class CarsController < ApplicationController
     render json: car_booking
   end
 
-  private
-    def set_car
-      @car = Car.find(params[:id])
-    end
+  def nearby_and_available
+    cars = Car.nearby_and_available(params[:latitude].to_d, params[:longitude].to_d)
+    render json: cars
+  end
 
-    def car_params
-      params.require(:car).permit(:name, :number, :make, :device_id, :latitude, :longitude)
-    end
+  private
+  def car_params
+    params.require(:car).permit(:name, :number, :make, :device_id, :latitude, :longitude)
+  end
 end
