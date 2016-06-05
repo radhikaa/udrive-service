@@ -1,5 +1,5 @@
 class CarBookingsController < ApplicationController
-  before_action :load_models
+  before_action :load_models, except: [:fetch_drives]
 
   def start_trip
     @current_booking.update_attributes(start_time: DateTime.now, start_latitude: params[:latitude], start_longitude: params[:longitude])
@@ -12,6 +12,12 @@ class CarBookingsController < ApplicationController
                                        :status => CarBooking::Status::CLOSED, :amount => amount)
     @car.update_attributes(:available => true)
     render json: @current_booking
+  end
+
+  def fetch_drives
+    user = User.where(email: params[:email]).first
+    car_bookings = CarBooking.where(user: user)
+    render json: car_bookings
   end
 
   private
