@@ -1,4 +1,16 @@
 class CarsController < ApplicationController
+  before_action :set_car, only: [:show]
+
+  def index
+    render json: Car.all
+  end
+
+  def show
+  end
+
+  def new
+    @car = Car.new
+  end
 
   def create
     @car = Car.new(car_params)
@@ -41,6 +53,9 @@ class CarsController < ApplicationController
   end
 
   private
+  def set_car
+    @car = Car.find(params[:id])
+  end
   def car_params
     params.require(:car).permit(:name, :number, :make, :device_id, :latitude, :longitude)
   end
