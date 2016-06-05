@@ -58,11 +58,9 @@ class CarsController < ApplicationController
   def book
     user = User.where(email: params[:email]).first
     car = Car.find_by(id: params[:id])
-    car_booking = CarBooking.new(car: car, user: user)
-    if car_booking.save
-      car.update(available: false)
-    end
-    render json: car
+    car_booking = CarBooking.new(car: car, user: user, status: CarBooking::Status::SCHEDULED)
+    car.update_attributes(available: false) if car_booking.save
+    render json: car_booking
   end
 
   private
